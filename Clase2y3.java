@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 public class Clase2y3 {
-    public static void main(String[] args) {
+    public static void main() {
 //        variablesConstantes();
 //        operadores();
 //        operadoresIncrementales();
@@ -118,7 +118,6 @@ public class Clase2y3 {
     //Práctico Clase 3 - Operadores
     public static void ejercicio1() {
         double numero1;
-        boolean resultado;
         try {
             BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Ingrese un numero entero :");
