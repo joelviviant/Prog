@@ -1,4 +1,4 @@
-public class MiClase{
+public class Prog_1 {
     public static void main(String[] args) {
         int edad;
         float altura, peso;
