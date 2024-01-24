@@ -9,7 +9,8 @@ public  class Clase4 {
         //ejercicio3();
         //ejercicio2_1();
         //ejercicio2_2();
-        ejercicio2_3();
+//        ejercicio2_3();
+        ejercicio2_4();
     }
 
     //Parte 1 TP Clase 4 - Selectivas o Condicionales
@@ -175,9 +176,26 @@ public  class Clase4 {
             mes = Integer.parseInt(entrada.readLine());
             System.out.println("Ingrese un año :");
             anio = Integer.parseInt(entrada.readLine());
-
+            int numeroAureo = calcularNumeroAureo(anio);
+            System.out.println(numeroAureo);
+            
         } catch (Exception exc) {
             System.out.println(exc);
         }
     }
+
+    public static int calcularNumeroAureo(int anio){
+        return (anio + 1) % 19;
+    }
+//    Calcular el número áureo: permite conocer en qué año-tipo del ciclo
+//    nos encontramos considerando la repetición de ciclos cada 19 años.
+//    El número áureo se calcula de la siguiente forma:
+//            – Tomamos la cifra del año que nos interesa (por ejemplo 2023) y le sumamos 1
+//            (2023+1=2024)
+//            – A continuación dividimos el resultado por 19 (ciclo de repetición) y nos
+//    quedamos con el resto 2024/19 = 106 resto = 10 (10 es el resto entre 2024 y 19). Al
+//    dividir por 19 hemos eliminado los ciclos repetidos. Así el número áureo es 10.
+
+
+
 }
