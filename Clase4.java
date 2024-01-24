@@ -165,4 +165,19 @@ public  class Clase4 {
             System.out.println(exc);
         }
     }
+    public static void ejercicio2_4() {
+        int dia, mes, anio;
+        try {
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Ingrese un día :");
+            dia = Integer.parseInt(entrada.readLine());
+            System.out.println("Ingrese un mes :");
+            mes = Integer.parseInt(entrada.readLine());
+            System.out.println("Ingrese un año :");
+            anio = Integer.parseInt(entrada.readLine());
+
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
 }
