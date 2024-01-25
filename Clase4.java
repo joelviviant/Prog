@@ -177,25 +177,39 @@ public  class Clase4 {
             System.out.println("Ingrese un año :");
             anio = Integer.parseInt(entrada.readLine());
             int numeroAureo = calcularNumeroAureo(anio);
-            System.out.println(numeroAureo);
-            
+            System.out.println("el numero aureo es "+numeroAureo);
+            int epacta = calcularEpacta(numeroAureo);
+            System.out.println("la epacta es "+epacta);
+            int edadLunar = calculadEdadLunar(epacta,mes,dia);
+            System.out.println(edadLunar);
         } catch (Exception exc) {
             System.out.println(exc);
         }
     }
-
     public static int calcularNumeroAureo(int anio){
         return (anio + 1) % 19;
+
     }
-//    Calcular el número áureo: permite conocer en qué año-tipo del ciclo
-//    nos encontramos considerando la repetición de ciclos cada 19 años.
-//    El número áureo se calcula de la siguiente forma:
-//            – Tomamos la cifra del año que nos interesa (por ejemplo 2023) y le sumamos 1
-//            (2023+1=2024)
-//            – A continuación dividimos el resultado por 19 (ciclo de repetición) y nos
-//    quedamos con el resto 2024/19 = 106 resto = 10 (10 es el resto entre 2024 y 19). Al
-//    dividir por 19 hemos eliminado los ciclos repetidos. Así el número áureo es 10.
 
+    public static int calcularEpacta(int numeroAureo){
+        return ((numeroAureo-1)*11)%30;
+    }
 
-
+    public static int calculadEdadLunar(int epacta, int mes, int dia){
+        if (mes==1 || mes==2){
+            mes = mes +10;
+        }else if (mes == 3){
+            mes = 0;
+        }else {
+            mes = mes -2;
+        }
+    int edadLunar = epacta + mes + dia;
+        int diasEdadLunar;
+        if (edadLunar>29){
+            diasEdadLunar = edadLunar % 30;
+        }else {
+            diasEdadLunar = edadLunar;
+        }
+        return diasEdadLunar;
+    }
 }
