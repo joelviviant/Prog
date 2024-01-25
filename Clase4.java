@@ -181,7 +181,9 @@ public  class Clase4 {
             int epacta = calcularEpacta(numeroAureo);
             System.out.println("la epacta es "+epacta);
             int edadLunar = calculadEdadLunar(epacta,mes,dia);
-            System.out.println(edadLunar);
+            System.out.println("la edad lunar es "+edadLunar);
+            String faseLunar = calcularFaseLunar(edadLunar);
+            System.out.println("La fase lunar para el dia " + dia + " es " + faseLunar);
         } catch (Exception exc) {
             System.out.println(exc);
         }
@@ -211,5 +213,19 @@ public  class Clase4 {
             diasEdadLunar = edadLunar;
         }
         return diasEdadLunar;
+    }
+
+    public static String calcularFaseLunar(int edadLunar){
+        if (edadLunar >= 0 && edadLunar <= 7) {
+            return "Luna Nueva";
+        } else if (edadLunar >= 8 && edadLunar <= 14) {
+            return "Luna Creciente";
+        } else if (edadLunar == 15) {
+            return "Luna Llena";
+        } else if (edadLunar >= 16 && edadLunar <= 29) {
+            return "Luna Menguante";
+        } else {
+            return "Edad lunar fuera de rango";
+        }
     }
 }
