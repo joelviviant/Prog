@@ -224,7 +224,6 @@ public class Clase5 {
                         caracter = input.charAt(0);
                     } else {
                         System.out.println("Ingrese al menos un carácter.");
-                        break; // Terminar el bucle si no se ingresa un carácter válido.
                     }
                 }
             }else{
