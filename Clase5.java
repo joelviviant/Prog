@@ -18,7 +18,8 @@ public class Clase5 {
         //ejercicio7();
         //ejercicio8();
         //ejercicio9();
-        ejercicio10();
+        //ejercicio10();
+        ejercicio11();
     }
 
     public static void iteracionWhile() {
@@ -379,6 +380,37 @@ public class Clase5 {
                     System.out.println("Ese número no corresponde a ningún mes.");
                 }
             } while (numero != 0);
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    public static void ejercicio11() {
+        try {
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            char caracter;
+            final int MAXMULTIPLICADOR = 10;
+            System.out.println("Ingrese un carácter (mayuscula o numero para salir): ");
+            String input = entrada.readLine();
+            if (input.length() > 0) {
+                caracter = input.charAt(0);
+                while (caracter >= 'a' && caracter <= 'z') {
+                    System.out.println("Ingrese un numero");
+                    int numero = Integer.valueOf(entrada.readLine());
+                    if (numero >= 1 && numero <= 5) {
+                        for (int multiplicador = 1; multiplicador <= MAXMULTIPLICADOR; multiplicador++) {
+                            System.out.println(multiplicador + " * " + numero + " = " + (multiplicador * numero));
+                        }
+                    } else {
+                        System.out.println("su numero no puede ser calculado");
+                    }
+                    System.out.println("Ingrese un carácter (mayuscula o numero para salir): ");
+                    input = entrada.readLine();
+                    if (input.length() > 0) {
+                        caracter = input.charAt(0);
+                    }
+
+                }
+            }
         } catch (Exception exc) {
             exc.printStackTrace();
         }
