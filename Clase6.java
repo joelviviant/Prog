@@ -11,7 +11,9 @@ public class Clase6 {
 //        ejercicio6();
 //        ejercicio7();
 //        ejercicio8();
-  ejercicio9();
+//        ejercicio9();
+//        ejercicio10();
+//        ejercicio11();
 
     }
 
@@ -126,17 +128,25 @@ public class Clase6 {
     public static void definirCaracter(char caracter) {
         if (Character.isDigit(caracter)) {
             System.out.println("El caracter " + caracter + " es un digito");
-        } else {
+        } else if (caracter >= 'A' && caracter <= 'Z') {
             if (esVocal(caracter)) {
-                System.out.println("el caracter " + caracter + " es una vocal");
+                System.out.println("el caracter " + caracter + " es una vocal y esta en MAYUSCULA");
             } else {
-                System.out.println("el caracter " + caracter + " es una consonante");
+                System.out.println("el caracter " + caracter + " es una consonante y esta en MAYUSCULA");
             }
+        } else if (caracter >= 'a' && caracter <= 'z') {
+            if (esVocal(caracter)) {
+                System.out.println("el caracter " + caracter + " es una vocal y esta en minuscula");
+            } else {
+                System.out.println("el caracter " + caracter + " es una consonante y esta en minuscula");
+            }
+        } else {
+            System.out.println("el caracter no es una letra ni un digito");
         }
     }
 
     public static boolean esVocal(char c) {
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O'||c == 'U';
     }
 
     public static void ejercicio6() {
@@ -291,6 +301,120 @@ public class Clase6 {
         }
         System.out.println("El resultado de " + numero + operador + numero2 + " = " + resultado );
     }
+
+
+    public static void ejercicio10() {
+        try {
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            int numero;
+            System.out.println("Ingrese un numero entre el 1 y el 10 ");
+            numero = Integer.valueOf(entrada.readLine());
+                while (numero > 1 && numero < 10) {
+                    char caracter;
+                    System.out.println("Ingrese un carácter");
+                    String input = entrada.readLine();
+                    if (input.length() > 0) {
+                        caracter = input.charAt(0);
+                        definirCaracter(caracter);
+                    }
+                    System.out.println("Ingrese un numero entre el 1 y el 10 ");
+                    numero = Integer.valueOf(entrada.readLine());
+                }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    public static void ejercicio11() {
+        try {
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            int numero;
+            System.out.println("Ingrese un numero entre el 1 y el 10 ");
+            numero = Integer.valueOf(entrada.readLine());
+            while (numero > 1 && numero < 10) {
+                if (numero % 3 == 0){
+                    char caracter;
+                    System.out.println("Ingrese un carácter");
+                    String input = entrada.readLine();
+                    if (input.length() > 0) {
+                        caracter = input.charAt(0);
+                        definirCaracter(caracter);
+                    }
+                } else if (numero % 5 == 0) {
+                    imprimirTabla(numero);
+                }else {
+                    System.out.println("el numero ingresado no es multiplo de 3 ni de 5");
+                }
+                System.out.println("Ingrese un numero entre el 1 y el 10 ");
+                numero = Integer.valueOf(entrada.readLine());
+            }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    public static void ejercicio12() {
+        int dia, mes, anio;
+        try {
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Ingrese un día :");
+            dia = Integer.parseInt(entrada.readLine());
+            System.out.println("Ingrese un mes :");
+            mes = Integer.parseInt(entrada.readLine());
+            System.out.println("Ingrese un año :");
+            anio = Integer.parseInt(entrada.readLine());
+            int numeroAureo = calcularNumeroAureo(anio);
+            System.out.println("el numero aureo es "+numeroAureo);
+            int epacta = calcularEpacta(numeroAureo);
+            System.out.println("la epacta es "+epacta);
+            int edadLunar = calculadEdadLunar(epacta,mes,dia);
+            System.out.println("la edad lunar es "+edadLunar);
+            String faseLunar = calcularFaseLunar(edadLunar);
+            System.out.println("La fase lunar para el dia " + dia + " es " + faseLunar);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+    public static int calcularNumeroAureo(int anio){
+        return (anio + 1) % 19;
+
+    }
+
+    public static int calcularEpacta(int numeroAureo){
+        return ((numeroAureo-1)*11)%30;
+    }
+
+    public static int calculadEdadLunar(int epacta, int mes, int dia){
+        if (mes==1 || mes==2){
+            mes = mes +10;
+        }else if (mes == 3){
+            mes = 0;
+        }else {
+            mes = mes -2;
+        }
+        int edadLunar = epacta + mes + dia;
+        int diasEdadLunar;
+        if (edadLunar>29){
+            diasEdadLunar = edadLunar % 30;
+        }else {
+            diasEdadLunar = edadLunar;
+        }
+        return diasEdadLunar;
+    }
+
+    public static String calcularFaseLunar(int edadLunar) {
+        if (edadLunar >= 0 && edadLunar <= 7) {
+            return "Luna Nueva";
+        } else if (edadLunar >= 8 && edadLunar <= 14) {
+            return "Luna Creciente";
+        } else if (edadLunar == 15) {
+            return "Luna Llena";
+        } else if (edadLunar >= 16 && edadLunar <= 29) {
+            return "Luna Menguante";
+        } else {
+            return "Edad lunar fuera de rango";
+        }
+    }
+
 }
 
 
