@@ -261,8 +261,8 @@ public class Clase5 {
 
     public static void ejercicio7() {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-        int MIN = 1;
-        int MAX = 10;
+        final int MIN = 1;
+        final int MAX = 10;
         int numero;
         int suma = 0;
         int cantidadSumas = -1;
@@ -395,7 +395,7 @@ public class Clase5 {
                 caracter = input.charAt(0);
                 while (caracter >= 'a' && caracter <= 'z') {
                     System.out.println("Ingrese un numero");
-                    int numero = Integer.valueOf(entrada.readLine());
+                    int numero = Integer.parseInt(entrada.readLine());
                     if (numero >= 1 && numero <= 5) {
                         for (int multiplicador = 1; multiplicador <= MAXMULTIPLICADOR; multiplicador++) {
                             System.out.println(multiplicador + " * " + numero + " = " + (multiplicador * numero));
@@ -408,7 +408,6 @@ public class Clase5 {
                     if (input.length() > 0) {
                         caracter = input.charAt(0);
                     }
-
                 }
             }
         } catch (Exception exc) {
