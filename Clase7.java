@@ -24,7 +24,9 @@ public class Clase7 {
 //        ejemplo4();
 //        ejemplo5();
 //        ejercicio1();
-        ejercicio2();
+//        ejercicio2();
+//        ejercicio3();
+        ejercicio4();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -184,6 +186,49 @@ public class Clase7 {
     }
 
 
+    public static void ejercicio3() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int pos;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero pos:");
+            pos = Integer.valueOf(entrada.readLine());
+            corrimientoIzquierda(arrenteros, pos);
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public static void corrimientoIzquierda(int[] arreglo, int posicion) {
+        int valorPosicion = arreglo[posicion];
+        for (int i = posicion; i < arreglo.length - 1; i++) {
+            arreglo[i] = arreglo[i + 1];
+        }
+        arreglo[arreglo.length - 1] = valorPosicion;
+    }
+
+    public static void ejercicio4() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int valor;
+        int pos= 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero:");
+            valor = Integer.valueOf(entrada.readLine());
+            corrimiento_der(arrenteros, pos);
+            arrenteros[0] = valor;
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
 
 }
 
