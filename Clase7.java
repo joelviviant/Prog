@@ -26,7 +26,8 @@ public class Clase7 {
 //        ejercicio1();
 //        ejercicio2();
 //        ejercicio3();
-        ejercicio4();
+//        ejercicio4();
+        ejercicio5();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -230,6 +231,35 @@ public class Clase7 {
         }
     }
 
+
+    public static void ejercicio5() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int valor;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero:");
+            valor = Integer.valueOf(entrada.readLine());
+            int pos = encontrarCoincidencia(arrenteros, valor);
+            corrimientoIzquierda(arrenteros,pos);
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public static int encontrarCoincidencia(int[] arreglo, int valor) {
+        int pos = -1;
+        for (int indice = 0; indice < MAX; indice++) {
+            if (arreglo[indice] == valor) {
+                pos = indice;
+                break;
+            }
+        }
+        return pos;
+    }
 }
 
 
