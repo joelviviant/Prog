@@ -23,7 +23,8 @@ public class Clase7 {
 //        imprimir_arreglo_double(arrdouble);
 //        ejemplo4();
 //        ejemplo5();
-        ejercicio1();
+//        ejercicio1();
+        ejercicio2();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -153,6 +154,36 @@ public class Clase7 {
             arr[n - 1 - i] = temporal;
         }
     }
+
+    public static void ejercicio2() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            int pares = contarPares(arrenteros);
+            if (pares!=0) {
+                System.out.println("El arreglo tinene " + pares + " numero pares");
+            }else {
+                System.out.println("El arreglo no tiene numeros pares");
+            }
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public static int contarPares(int[] arr) {
+        int total = 0;
+        for (int i = 0; i < MAX; i++) {
+            if (arr[i]%2 == 0){
+                total++;
+            }
+        }
+        return total;
+    }
+
+
 
 }
 
