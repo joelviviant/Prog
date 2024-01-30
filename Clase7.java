@@ -32,7 +32,8 @@ public class Clase7 {
 //        ejemploOrdenamientos();
 //        ejemploInsercion();
 //        ejercicio7();
-        ejercicio8();
+//        ejercicio8();
+        ejercicio9();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -422,6 +423,44 @@ public class Clase7 {
             System.out.println(exc);
         }
     }
+
+    public static void ejercicio9(){
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int pos1, pos2;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero para pos1:");
+            pos1 = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese un numero entero para pos2:");
+            pos2 = Integer.valueOf(entrada.readLine());
+            ordenar_arreglo_posicional(arrenteros,pos1, pos2);
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+
+    public static void ordenar_arreglo_posicional(int[] arr, int pos1, int pos2) {
+        if (pos1 < 0 || pos1 >= pos2 || pos2 >= MAX) {
+            System.out.println("Error: Posiciones de subarreglo inválidas.");
+            return;
+        }
+        for (int i = pos1; i <= pos2; i++) {
+            for (int j = pos1; j <= pos2 - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+
 }
 
 
