@@ -31,7 +31,8 @@ public class Clase7 {
 //        ejercicio6();
 //        ejemploOrdenamientos();
 //        ejemploInsercion();
-        ejercicio7();
+//        ejercicio7();
+        ejercicio8();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -264,6 +265,18 @@ public class Clase7 {
         }
         return pos;
     }
+    public static int encontrarCoincidenciaOrdenado(int[] arreglo, int valor) {
+        int pos = -1;
+        for (int indice = 0; indice < MAX; indice++) {
+            if (arreglo[indice] == valor) {
+                pos = indice;
+                break;
+            } else if (indice+1!=MAX && arreglo[indice+1]>valor) {
+                return pos;
+            }
+        }
+        return pos;
+    }
 
     public static void ejercicio6() {
         int[] arrenteros;
@@ -389,6 +402,25 @@ public class Clase7 {
 
     public static void insertarInt(int []arr,int valor, int pos){
         arr[pos]=valor;
+    }
+
+    public static void ejercicio8() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int valor;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            ordenar_arreglo_burbujeo(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero:");
+            valor = Integer.valueOf(entrada.readLine());
+            int pos = encontrarCoincidenciaOrdenado(arrenteros, valor);
+            corrimientoIzquierda(arrenteros, pos);
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
 }
 
