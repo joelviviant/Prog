@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
 
@@ -27,7 +26,8 @@ public class Clase7 {
 //        ejercicio2();
 //        ejercicio3();
 //        ejercicio4();
-        ejercicio5();
+//        ejercicio5();
+        ejercicio6();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -205,18 +205,18 @@ public class Clase7 {
     }
 
     public static void corrimientoIzquierda(int[] arreglo, int posicion) {
-        int valorPosicion = arreglo[posicion];
+
         for (int i = posicion; i < arreglo.length - 1; i++) {
             arreglo[i] = arreglo[i + 1];
         }
-        arreglo[arreglo.length - 1] = valorPosicion;
+        arreglo[arreglo.length - 1] = 0;
     }
 
     public static void ejercicio4() {
         int[] arrenteros;
         arrenteros = new int[MAX];
         int valor;
-        int pos= 0;
+        int pos = 0;
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
         try {
             cargar_arreglo_aleatorio_int(arrenteros);
@@ -243,7 +243,7 @@ public class Clase7 {
             System.out.println("Ingrese un numero entero:");
             valor = Integer.valueOf(entrada.readLine());
             int pos = encontrarCoincidencia(arrenteros, valor);
-            corrimientoIzquierda(arrenteros,pos);
+            corrimientoIzquierda(arrenteros, pos);
             imprimir_arreglo_int(arrenteros);
         } catch (Exception exc) {
             System.out.println(exc);
@@ -259,6 +259,26 @@ public class Clase7 {
             }
         }
         return pos;
+    }
+
+    public static void ejercicio6() {
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int valor;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero:");
+            valor = Integer.valueOf(entrada.readLine());
+            int pos = 0;  // Inicializa la posición en cero
+            while ((pos = encontrarCoincidencia(arrenteros, valor)) != -1) {
+                corrimientoIzquierda(arrenteros, pos);
+            }
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
 }
 
