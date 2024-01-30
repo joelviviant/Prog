@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Clase7 {
@@ -27,7 +28,10 @@ public class Clase7 {
 //        ejercicio3();
 //        ejercicio4();
 //        ejercicio5();
-        ejercicio6();
+//        ejercicio6();
+//        ejemploOrdenamientos();
+//        ejemploInsercion();
+        ejercicio7();
     }
 
     //carga de arreglo de char con valores de 'a' a la 'z'
@@ -280,7 +284,116 @@ public class Clase7 {
             System.out.println(exc);
         }
     }
+
+    //METODOS DE ORDENAMIENTO
+
+    public static void ordenar_arreglo_seleccion(int[]arr) {
+        int pos_menor, tmp;
+        for (int i = 0; i < MAX; i++) {
+            pos_menor = i;
+            for (int j = i + 1; j < MAX; j++){
+                if (arr[j] < arr[pos_menor]) {
+                    pos_menor = j;
+                }
+            }
+            if (pos_menor != i){
+                tmp = arr[i];
+                arr[i] = arr[pos_menor];
+                arr[pos_menor] = tmp;
+            }
+        }
+    }
+
+    public static void ordenar_arreglo_insercion(int[]arr) {
+        int aux, j;
+        for (int i = 1; i < MAX; i++) {
+            aux = arr[i];
+            j = i - 1;
+            while ((j >= 0) && (arr[j] > aux)){
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = aux;
+        }
+    }
+    public static void ordenar_arreglo_burbujeo(int[] arr){
+        int temp;
+        for(int i = 1;i < MAX;i++){
+            for (int j = 0 ; j < MAX - 1; j++){
+                if (arr[j] > arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void ejemploOrdenamientos(){
+        int [] arrenteros;
+        arrenteros = new int [MAX];
+        cargar_arreglo_aleatorio_int(arrenteros);
+        System.out.println("arreglo desordenado");
+        imprimir_arreglo_int(arrenteros);
+        ordenar_arreglo_seleccion(arrenteros);
+        System.out.println("arreglo ordenado - seleccion");
+        imprimir_arreglo_int(arrenteros);
+
+        cargar_arreglo_aleatorio_int(arrenteros);
+        System.out.println("arreglo desordenado");
+        imprimir_arreglo_int(arrenteros);
+        ordenar_arreglo_insercion(arrenteros);
+        System.out.println("arreglo ordenado - insercion");
+        imprimir_arreglo_int(arrenteros);
+
+        cargar_arreglo_aleatorio_int(arrenteros);
+        System.out.println("arreglo desordenado");
+        imprimir_arreglo_int(arrenteros);
+        ordenar_arreglo_burbujeo(arrenteros);
+        System.out.println("arreglo ordenado - burbujeo ");
+        imprimir_arreglo_int(arrenteros);
+
+    }
+
+
+    public static void ejercicio7(){
+        int[] arrenteros;
+        arrenteros = new int[MAX];
+        int valor;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            cargar_arreglo_aleatorio_int(arrenteros);
+            ordenar_arreglo_burbujeo(arrenteros);
+            imprimir_arreglo_int(arrenteros);
+            System.out.println("Ingrese un numero entero:");
+            valor = Integer.valueOf(entrada.readLine());
+            int pos =obtenerPosicion(arrenteros,valor);
+            corrimiento_der(arrenteros,pos);
+            insertarInt(arrenteros,valor,pos);
+            imprimir_arreglo_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+
+
+    public static int obtenerPosicion(int[] arr, int valor){
+            int posicionInsercion = Arrays.binarySearch(arr, valor);
+            if (posicionInsercion < 0) {
+               return -posicionInsercion - 1;
+            } else {
+                return posicionInsercion;
+            }
+    }
+
+    public static void insertarInt(int []arr,int valor, int pos){
+        arr[pos]=valor;
+    }
 }
+
+
+
 
 
 
