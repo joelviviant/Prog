@@ -19,7 +19,8 @@ public class Clase7_1 {
 //        cargar_arreglo_aleatorio_secuencias_int(arrint);
 //        imprimir_arreglo_secuencias_int(arrint);
 //        precargarArreglo();
-        ejercicio10();
+//        ejercicio10();
+        ejercicio11();
     }
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
@@ -114,5 +115,59 @@ public class Clase7_1 {
         return pos2;
     }
 
+
+    public static void imprimir_suma_cada_secuencia(int[] arr){
+        int inicio,fin,suma;
+        inicio = 0;
+        fin = -1;
+        while ((inicio < MAX)){
+            inicio = encontrarInicioSecuencia(arr,fin+1); //REUTILIZAMOS
+            if (inicio < MAX){
+                fin = encontrarFinSecuencia(arr,inicio); //REUTILIZAMOS
+                suma = obtener_suma_secuencia(arr,inicio,fin);
+                System.out.println("La suma de la secuencia de "+inicio+" a "+fin+" es "+suma);
+            }
+        }
+    }
+    public static int obtener_suma_secuencia(int[] arr, int inicio, int fin){
+        int suma = 0;
+        while (inicio <= fin){
+            suma+=arr[inicio];
+            inicio++;
+        }
+        return suma;
+    }
+    public static void imprimir_suma_Mayor(int[] arr){
+        int inicio,fin,suma, sumaTemp , inicioTemp, finTemp;
+        inicio = 0;
+        fin = -1;
+        sumaTemp=0;
+        suma=0;
+        inicioTemp= 0;
+        finTemp= 0;
+        while ((inicio < MAX)){
+            inicio = encontrarInicioSecuencia(arr,fin+1); //REUTILIZAMOS
+            if (inicio < MAX){
+                fin = encontrarFinSecuencia(arr,inicio); //REUTILIZAMOS
+                suma = obtener_suma_secuencia(arr,inicio,fin);
+            }
+            if (sumaTemp<suma){
+                inicioTemp= inicio;
+                finTemp = fin;
+                sumaTemp= suma;
+            }
+        }
+        System.out.println("La suma mayor de las secuencias es "+ sumaTemp+" de la posicion "+inicioTemp+" a "+finTemp);
+
+    }
+
+
+    public static void ejercicio11() {
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+        imprimir_suma_Mayor(arrenteros);
+    }
 
 }
