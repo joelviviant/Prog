@@ -213,4 +213,16 @@ public class Clase7_1 {
         }
         System.out.println("la anteultima secuencia inicia en "+ inicio+ " y finaliza en " + fin);
     }
+
+
+    public static void ejercicio13(){
+        /*
+        cargar arreglo
+        imprimir arreglo
+        pedir un numero
+        encontrar todas las secuencias del mismo tamaño que ese numero
+        {encontrar inicio}
+        corrimiento a la izquierda
+         */
+    }
 }
