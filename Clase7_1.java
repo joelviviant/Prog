@@ -20,7 +20,8 @@ public class Clase7_1 {
 //        imprimir_arreglo_secuencias_int(arrint);
 //        precargarArreglo();
 //        ejercicio10();
-        ejercicio11();
+//        ejercicio11();
+        ejercicio12();
     }
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
@@ -72,13 +73,14 @@ public class Clase7_1 {
         arrenteros = new int[MAX];
         cargar_arreglo_aleatorio_secuencias_int(arrenteros);
         imprimir_arreglo_secuencias_int(arrenteros);
+        imprimir_suma_cada_secuencia(arrenteros);
         int pos;
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Ingrese un numero (pos):");
             pos = Integer.valueOf(entrada.readLine());
             if (arrenteros[pos]!=0){
-                int posInicial= encontrarInicioSecuencia(arrenteros, pos);
+                int posInicial= encontrarInicioSecuenciaEspecifico(arrenteros, pos);
                 int posFinal = encontrarFinSecuencia(arrenteros,pos);
                 System.out.println("la posicion inicial de la secuencia es "+ posInicial + " y la posicion final es "+ posFinal);
             }else {
@@ -88,8 +90,28 @@ public class Clase7_1 {
             System.out.println(exc);
         }
     }
+    public static int encontrarInicioSecuencia(int[] arr, int pos){
+        for (int i = pos; i < MAX; i++) {
+            if (arr[i] != 0) {
+                return i ;
+            }
+        }
+        return -1;
+    }
+    public static int encontrarInicioSecuenciaReversa(int [] arr, int pos){
+        int pos1 = 0;
+            for (int i = pos; i >= 0; i--) {
+                if (arr[i] == 0) {
+                    pos1 = i + 1;
+                    break;
+                }
+            }
+        return pos1;
+    }
 
-    public static int encontrarInicioSecuencia(int[] arr, int pos) {
+
+
+    public static int encontrarInicioSecuenciaEspecifico(int[] arr, int pos) {
         int pos1 = 0;
         if (pos >= 0 && pos < arr.length) {
             for (int i = pos; i >= 0; i--) {
@@ -102,26 +124,32 @@ public class Clase7_1 {
         return pos1;
     }
 
-    public static int encontrarFinSecuencia(int[] arr, int pos){
+    public static int encontrarFinSecuencia(int[] arr, int pos) {
         int pos2 = 0;
-        if (pos >= 0 && pos < arr.length) {
-            for (int i = pos; i <MAX; i++) {
-                if (arr[i] == 0) {
-                    pos2 = i - 1;
-                    break;
-                }
+        for (int i = pos; i < MAX; i++) {
+            if (arr[i] == 0) {
+                pos2 = i - 1;
+                break;
             }
         }
         return pos2;
     }
 
+    public static int encontrarFinSecuenciaReversa(int[] arr, int pos){
+        for (int i = pos; i > 0; i--) {
+            if (arr[i] != 0) {
+                return i ;
+            }
+        }
+        return -1;
+    }
 
     public static void imprimir_suma_cada_secuencia(int[] arr){
         int inicio,fin,suma;
         inicio = 0;
         fin = -1;
         while ((inicio < MAX)){
-            inicio = encontrarInicioSecuencia(arr,fin+1); //REUTILIZAMOS
+            inicio = encontrarInicioSecuenciaEspecifico(arr,fin+1); //REUTILIZAMOS
             if (inicio < MAX){
                 fin = encontrarFinSecuencia(arr,inicio); //REUTILIZAMOS
                 suma = obtener_suma_secuencia(arr,inicio,fin);
@@ -146,7 +174,7 @@ public class Clase7_1 {
         inicioTemp= 0;
         finTemp= 0;
         while ((inicio < MAX)){
-            inicio = encontrarInicioSecuencia(arr,fin+1); //REUTILIZAMOS
+            inicio = encontrarInicioSecuenciaEspecifico(arr,fin+1); //REUTILIZAMOS
             if (inicio < MAX){
                 fin = encontrarFinSecuencia(arr,inicio); //REUTILIZAMOS
                 suma = obtener_suma_secuencia(arr,inicio,fin);
@@ -170,4 +198,19 @@ public class Clase7_1 {
         imprimir_suma_Mayor(arrenteros);
     }
 
+    public static void ejercicio12(){
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        int secuencias=0;
+        int fin =0;
+        int inicio=MAX;
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+        while (secuencias < 2) {
+           fin = encontrarFinSecuenciaReversa(arrenteros, inicio - 1);
+           inicio = encontrarInicioSecuenciaReversa(arrenteros, fin);
+            secuencias++;
+        }
+        System.out.println("la anteultima secuencia inicia en "+ inicio+ " y finaliza en " + fin);
+    }
 }
