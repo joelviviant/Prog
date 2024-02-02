@@ -21,7 +21,8 @@ public class Clase7_1 {
 //        precargarArreglo();
 //        ejercicio10();
 //        ejercicio11();
-        ejercicio12();
+//        ejercicio12();
+        ejercicio13();
     }
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
@@ -216,13 +217,43 @@ public class Clase7_1 {
 
 
     public static void ejercicio13(){
-        /*
-        cargar arreglo
-        imprimir arreglo
-        pedir un numero
-        encontrar todas las secuencias del mismo tamaño que ese numero
-        {encontrar inicio}
-        corrimiento a la izquierda
-         */
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+        int longitud;
+        int tamanio = 0;
+        int c = 0;
+        int f = 0;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese una longitud:");
+            longitud = Integer.valueOf(entrada.readLine());
+                c = encontrarInicioSecuencia(arrenteros,0);
+                f = encontrarFinSecuencia(arrenteros,c);
+                for (int t = c;t<=f;t++){
+                    tamanio++;
+                }
+                if (tamanio==longitud){
+                    for (int elim= c; elim==f; elim++) {
+                        corrimientoIzquierda(arrenteros, elim);
+                    }
+                }
+            System.out.println(c);
+            System.out.println(f);
+            System.out.println("tamanio "+ tamanio);
+            imprimir_arreglo_secuencias_int(arrenteros);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+
+    }
+
+    public static void corrimientoIzquierda(int[] arreglo, int posicion) {
+
+        for (int i = posicion; i < arreglo.length - 1; i++) {
+            arreglo[i] = arreglo[i + 1];
+        }
+        arreglo[arreglo.length - 1] = 0;
     }
 }
