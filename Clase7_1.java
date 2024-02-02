@@ -234,13 +234,11 @@ public class Clase7_1 {
                 for (int t = c;t<=f;t++){
                     tamanio++;
                 }
-                if (tamanio==longitud){
-                    for (int elim= c; elim==f; elim++) {
+                if (tamanio==longitud) {
+                    for (int elim = c; elim == f; elim++) {
                         corrimientoIzquierda(arrenteros, elim);
                     }
                 }
-            System.out.println(c);
-            System.out.println(f);
             System.out.println("tamanio "+ tamanio);
             imprimir_arreglo_secuencias_int(arrenteros);
         } catch (Exception exc) {
