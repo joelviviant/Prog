@@ -215,36 +215,36 @@ public class Clase7_1 {
         System.out.println("la anteultima secuencia inicia en "+ inicio+ " y finaliza en " + fin);
     }
 
-
     public static void ejercicio13(){
         int [] arrenteros;
         arrenteros = new int[MAX];
         cargar_arreglo_aleatorio_secuencias_int(arrenteros);
         imprimir_arreglo_secuencias_int(arrenteros);
         int longitud;
-        int tamanio = 0;
-        int c = 0;
-        int f = 0;
+
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Ingrese una longitud:");
             longitud = Integer.valueOf(entrada.readLine());
-                c = encontrarInicioSecuencia(arrenteros,0);
-                f = encontrarFinSecuencia(arrenteros,c);
-                for (int t = c;t<=f;t++){
-                    tamanio++;
+            int comienzo = 0;
+            while (comienzo < arrenteros.length) {
+                int c = encontrarInicioSecuencia(arrenteros, comienzo);
+                if (c == -1) {
+                    break;
                 }
-                if (tamanio==longitud) {
-                    for (int elim = c; elim == f; elim++) {
-                        corrimientoIzquierda(arrenteros, elim);
+                int f = encontrarFinSecuencia(arrenteros, c);
+                int tamanio = f - c + 1;
+                if (tamanio == longitud) {
+                    for (int i = c; i <= f; i++) {
+                        corrimientoIzquierda(arrenteros, c);
                     }
                 }
-            System.out.println("tamanio "+ tamanio);
+                comienzo = f + 1;
+            }
             imprimir_arreglo_secuencias_int(arrenteros);
         } catch (Exception exc) {
             System.out.println(exc);
         }
-
     }
 
     public static void corrimientoIzquierda(int[] arreglo, int posicion) {
