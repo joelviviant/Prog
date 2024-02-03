@@ -254,4 +254,52 @@ public class Clase7_1 {
         }
         arreglo[arreglo.length - 1] = 0;
     }
+
+
+    public static void ejercicio14(){
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        int [] nuevoArreglo;
+        nuevoArreglo = new int [MAX];
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(nuevoArreglo);
+        int longitud;
+
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese una longitud:");
+            longitud = Integer.valueOf(entrada.readLine());
+            int comienzo = 0;
+            int nuevoArregloPos = 1;
+            while (comienzo < arrenteros.length) {
+                int c = encontrarInicioSecuencia(arrenteros, comienzo);
+                if (c == -1) {
+                    break;
+                }
+                int f = encontrarFinSecuencia(arrenteros, c);
+                int tamanio = f - c + 1;
+                if (tamanio == longitud) {
+                    if (nuevoArregloPos > 1) {
+                        nuevoArreglo[nuevoArregloPos] = 0;
+                        nuevoArregloPos++;
+                    }
+                    for (int i = c; i <= f; i++) {
+                        nuevoArreglo[nuevoArregloPos] = arrenteros[i];
+                        nuevoArregloPos++;
+                    }
+                }
+                comienzo = f + 1;
+            }
+            imprimir_arreglo_secuencias_int(arrenteros);
+            System.out.println("el nuevo arreglo es");
+            imprimir_arreglo_secuencias_int(nuevoArreglo);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+
+
+
 }
