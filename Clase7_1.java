@@ -22,7 +22,9 @@ public class Clase7_1 {
 //        ejercicio10();
 //        ejercicio11();
 //        ejercicio12();
-        ejercicio13();
+//        ejercicio13();
+//        ejercicio14();
+        ejercicio15();
     }
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
@@ -298,7 +300,46 @@ public class Clase7_1 {
             System.out.println(exc);
         }
     }
+    public static void ejercicio15(){
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        int [] nuevoArreglo;
+        nuevoArreglo = new int [MAX];
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+        int int1;
+        int int2;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese el primer digito del patron");
+            int1 = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese el segundo digito del patron");
+            int2 = Integer.valueOf(entrada.readLine());
+            int comienzo = 0;
+            nuevoArreglo[1]=int1;
+            nuevoArreglo[2]=int2;
+            System.out.println("el nuevo arreglo es");
+            imprimir_arreglo_secuencias_int(nuevoArreglo);
+            while (comienzo < arrenteros.length) {
+                int c = encontrarInicioSecuencia(arrenteros, comienzo);
+                if (c == -1) {
+                    break;
+                }
+                int f = encontrarFinSecuencia(arrenteros, c);
 
+                if (arrenteros[c] == nuevoArreglo[1] && arrenteros[f] == nuevoArreglo [2]) {
+                    for (int i = c; i <= f; i++) {
+                       corrimientoIzquierda(arrenteros,c);
+                    }
+                }
+                comienzo = f + 1;
+            }
+            imprimir_arreglo_secuencias_int(arrenteros);
+
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
 
 
 
