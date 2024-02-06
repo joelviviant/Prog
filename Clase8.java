@@ -21,7 +21,8 @@ public class Clase8 {
 //        imprimir_matriz_char(matchar);
 //        imprimir_matriz_int(matint);
 //        imprimir_matriz_double(matdouble);
-        ejemplo2();
+//        ejemplo2();
+        ejercicio1();
 
     }
 
@@ -190,4 +191,27 @@ public class Clase8 {
         }
     }
 
+    public static void ejercicio1() {
+        int[][] matint;
+        int fila, columna;
+        fila=0;
+        columna=0;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        for (int f = 0; f<MAXFILA; f++) {
+            invertir_pos(matint[f]);
+        }
+        System.out.println("nueva matriz");
+        imprimir_matriz_int(matint);
+    }
+    public static void invertir_pos(int[] arr) {
+        int n = arr.length;
+            for (int i = 0; i < n / 2; i++) {
+                int temporal = arr[i];
+                arr[i] = arr[n - 1 - i];
+                arr[n - 1 - i] = temporal;
+            }
+
+    }
 }
