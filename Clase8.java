@@ -29,7 +29,8 @@ public class Clase8 {
 //        ejercicio5();
 //        ejercicio6();
 //        ejercicio7();
-        ejercicio8();
+//        ejercicio8();
+        ejercicio9();
 
     }
 
@@ -479,6 +480,45 @@ public class Clase8 {
             imprimir_matriz_int(matint);
         }catch (Exception exc) {
             System.out.println(exc);
+        }
+    }
+
+
+    public static void ejercicio9() {
+        int[][] matint;
+        int[] resultado = new int[2];
+        int numero,numero2, fila, columna;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese otro numero :");
+            numero2 = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            ordenar_fila_entre_columnas(matint[fila],numero,numero2);
+            imprimir_matriz_int(matint);
+        }catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+    public static void ordenar_fila_entre_columnas(int []arr,int numero, int numero2){
+        for (int i =numero; i<=numero2;i++){
+            int pos_menor = i;
+            for (int j = i + 1; j <= numero2; j++) {
+                if (arr[j] < arr[pos_menor]) {
+                    pos_menor = j;
+                }
+            }
+            if (pos_menor != i) {
+                int tmp = arr[i];
+                arr[i] = arr[pos_menor];
+                arr[pos_menor] = tmp;
+            }
         }
     }
 }
