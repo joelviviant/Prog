@@ -27,7 +27,9 @@ public class Clase8 {
 //        ejercicio3();
 //        ejercicio4();
 //        ejercicio5();
-        ejercicio6();
+//        ejercicio6();
+//        ejercicio7();
+        ejercicio8();
 
     }
 
@@ -268,11 +270,13 @@ public class Clase8 {
     }
 
     public static void corrimiento_izq_fila_columna(int[] arrenteros, int pos) {
-        int indice = pos;
-        while (indice < arrenteros.length - 1) {
-            arrenteros[indice] = arrenteros[indice + 1];
-            indice++;
+        if (pos < 0 || pos >= arrenteros.length) {
+            return;
         }
+        for (int indice = pos; indice < arrenteros.length - 1; indice++) {
+            arrenteros[indice] = arrenteros[indice + 1];
+        }
+        arrenteros[arrenteros.length - 1] = 0;
     }
 
     public static void ejercicio4(){
@@ -308,13 +312,6 @@ public class Clase8 {
         }
         arrenteros[pos] = numero;
     }
-
-    /*
-    * Hacer un programa que dado una matriz de enteros de tamaño 5*10 que se encuentra
-    precargada, solicite al usuario un numero entero y elimine la primer ocurrencia de numero
-    en la matriz (un número igual) si existe. Para ello tendrá que buscar la posición y si está,
-    realizar un corrimiento a izquierda y no continuar buscando.
-    * */
 
 
     public static void ejercicio5(){
@@ -359,8 +356,6 @@ public class Clase8 {
         return resultado; // Devolvemos -1 si no se encontró ninguna coincidencia
     }
 
-
-
     public static void ejercicio6(){
         int [][] matint;
         int fila, columna, numero;
@@ -391,6 +386,101 @@ public class Clase8 {
         }
     }
 
+
+
+    public static void ejercicio7() {
+        int[][] matint;
+        int numero, fila;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        for (int c = 0; c < MAXCOLUMNA; c++) {
+            ordenar_matriz_columna_seleccion(matint, c);
+        }
+        for (int f = 0; f < MAXFILA; f++) {
+            ordenar_arreglo_seleccion(matint[f]);
+        }
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            insertarOrdenado(matint[fila], numero);
+            imprimir_matriz_int(matint);
+    }catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
+
+    public static void ordenar_matriz_columna_seleccion(int[][] mat, int columna) {
+        for (int i = 0; i < MAXFILA - 1; i++) {
+            int pos_menor = i;
+            for (int j = i + 1; j < MAXFILA; j++) {
+                if (mat[j][columna] < mat[pos_menor][columna]) {
+                    pos_menor = j;
+                }
+            }
+            if (pos_menor != i) {
+                int tmp = mat[i][columna];
+                mat[i][columna] = mat[pos_menor][columna];
+                mat[pos_menor][columna] = tmp;
+            }
+        }
+    }
+
+    public static void ordenar_arreglo_seleccion(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int pos_menor = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[pos_menor]) {
+                    pos_menor = j;
+                }
+            }
+            if (pos_menor != i) {
+                int tmp = arr[i];
+                arr[i] = arr[pos_menor];
+                arr[pos_menor] = tmp;
+            }
+        }
+    }
+    public static void insertarOrdenado(int[] arr, int numero) {
+        int i;
+        for (i = arr.length - 1; i > 0 && arr[i - 1] > numero; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[i] = numero;
+    }
+
+    public static void ejercicio8() {
+        int[][] matint;
+        int[] resultado = new int[2];
+        int numero, fila, columna;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        for (int c = 0; c < MAXCOLUMNA; c++) {
+            ordenar_matriz_columna_seleccion(matint, c);
+        }
+        for (int f = 0; f < MAXFILA; f++) {
+            ordenar_arreglo_seleccion(matint[f]);
+        }
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            resultado = encontrar_coincidencia(matint,numero);
+            fila = resultado[0];
+            columna = resultado[1];
+            corrimiento_izq_fila_columna(matint[fila], columna);
+            imprimir_matriz_int(matint);
+        }catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
 }
 
 
