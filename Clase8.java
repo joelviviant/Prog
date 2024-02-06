@@ -25,7 +25,8 @@ public class Clase8 {
 //        ejercicio1();
 //        ejercicio2();
 //        ejercicio3();
-        ejercicio4();
+//        ejercicio4();
+        ejercicio5();
 
     }
 
@@ -307,5 +308,55 @@ public class Clase8 {
         arrenteros[pos] = numero;
     }
 
+    /*
+    * Hacer un programa que dado una matriz de enteros de tamaño 5*10 que se encuentra
+    precargada, solicite al usuario un numero entero y elimine la primer ocurrencia de numero
+    en la matriz (un número igual) si existe. Para ello tendrá que buscar la posición y si está,
+    realizar un corrimiento a izquierda y no continuar buscando.
+    * */
 
+
+    public static void ejercicio5(){
+            int [][] matint;
+            int fila, columna, numero;
+            int [] resultado;
+
+            matint = new int[MAXFILA][MAXCOLUMNA];
+            cargar_matriz_aleatorio_int(matint);
+            imprimir_matriz_int(matint);
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                System.out.println("Ingrese un numero :");
+                numero = Integer.valueOf(entrada.readLine());
+                resultado = encontrar_coincidencia(matint,numero);
+                fila = resultado[0];
+                columna = resultado[1];
+                System.out.println(fila);
+                System.out.println(columna);
+                corrimiento_izq_fila_columna(matint[fila],columna);
+                imprimir_matriz_int(matint);
+
+            }catch (Exception exc){
+                System.out.println(exc);
+            }
+    }
+
+    public static int[] encontrar_coincidencia(int[][] mat, int numero) {
+        int[] resultado = new int[2];
+        for (int fila = 0; fila < MAXFILA; fila++) {
+            for (int columna = 0; columna < mat[fila].length; columna++) {
+                if (mat[fila][columna] == numero) {
+                    resultado[0] = fila;
+                    resultado[1] = columna;
+                    return resultado;
+                }
+            }
+        }
+        resultado[0] = -1;
+        resultado[1] = -1;
+        return resultado;
+    }
 }
+
+
+
