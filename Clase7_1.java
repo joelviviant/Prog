@@ -48,8 +48,7 @@ public class Clase7_1 {
         }
         System.out.print("\n");
     }
-    public static void cargar_arreglo_aleatorio_secuencias_int(int []
-                                                                       arr){
+    public static void cargar_arreglo_aleatorio_secuencias_int(int [] arr){
         Random r = new Random();
         arr[0] = 0;
         arr[MAX-1] = 0;

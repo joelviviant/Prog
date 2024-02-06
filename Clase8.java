@@ -6,10 +6,12 @@ public class Clase8 {
     public static final int MAXCOLUMNA = 5;
     public static final int MAXVALOR = 10;
     public static final int MINVALOR = 1;
+    public static final double probabilidad_letra = 0.4;
+    public static final double probabilidad_numero = 0.4;
     public static void main(String[] args) {
-        char [][] matchar;
-        int [][] matint;
-        double [][] matdouble;
+        char[][] matchar;
+        int[][] matint;
+        double[][] matdouble;
         matchar = new char[MAXFILA][MAXCOLUMNA];
         matint = new int[MAXFILA][MAXCOLUMNA];
         matdouble = new double[MAXFILA][MAXCOLUMNA];
@@ -30,7 +32,8 @@ public class Clase8 {
 //        ejercicio6();
 //        ejercicio7();
 //        ejercicio8();
-        ejercicio9();
+//        ejercicio9();
+    ejercicio10();
 
     }
 
@@ -521,6 +524,63 @@ public class Clase8 {
             }
         }
     }
+    public static void cargar_matriz_aleatorio_secuencias_int(int [][] mat){
+        for (int fila = 0; fila < MAXFILA; fila++){
+            cargar_arreglo_aleatorio_secuencias_int(mat[fila]);
+        }
+        System.out.println("");
+    }
+    public static void cargar_matriz_aleatorio_secuencias_char(char
+                                                                       [][] mat){
+        for (int fila = 0; fila < MAXFILA; fila++){
+            cargar_arreglo_aleatorio_secuencias_char(mat[fila]);
+        }
+        System.out.println("");
+    }
+    public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
+        Random r = new Random();
+        arr[0] = ' ';
+        arr[MAXFILA-1] = ' ';
+        for (int pos = 1; pos < MAXFILA-1; pos++){
+            if (r.nextDouble()>probabilidad_letra){
+                arr[pos]=(char)(r.nextInt(26) + 'a');
+            }
+            else{
+                arr[pos]=' ';
+            }
+        }
+    }
+    public static void cargar_arreglo_aleatorio_secuencias_int(int [] arr){
+        Random r = new Random();
+        arr[0] = 0;
+        arr[MAXCOLUMNA-1] = 0;
+        for (int pos = 1; pos < MAXCOLUMNA-1; pos++){
+            if (r.nextDouble()>probabilidad_numero){
+                arr[pos]=(r.nextInt(MAXVALOR-MINVALOR+1) + MINVALOR);
+            }
+            else{
+                arr[pos]=0;
+            }
+        }
+    }
+
+    public static void ejercicio10(){
+        int[][] matint;
+       int  fin= 0;
+        int inicio = 0;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        for (int fila = 0; fila < MAXFILA; fila++){
+            cargar_arreglo_aleatorio_secuencias_int(matint[fila]);
+        }
+        imprimir_matriz_int(matint);
+
+//        for (int fila = 0; fila < MAXFILA; fila++) {
+//            inicio = encontrarInicioSecuencia(matint[fila], fin + 1);
+//            fin = encontrarFinSecuencia(matint[fila], inicio);
+//            System.out.println("Inicio: " + inicio + ", Fin: " + fin);
+//        }
+    }
+
 }
 
 
