@@ -22,7 +22,8 @@ public class Clase8 {
 //        imprimir_matriz_int(matint);
 //        imprimir_matriz_double(matdouble);
 //        ejemplo2();
-        ejercicio1();
+//        ejercicio1();
+        ejercicio2();
 
     }
 
@@ -213,5 +214,30 @@ public class Clase8 {
                 arr[n - 1 - i] = temporal;
             }
 
+    }
+
+    public static void ejercicio2() {
+        int[][] matint;
+        int fila, columna;
+        fila=0;
+        columna=0;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        for (int f = 0; f<MAXFILA; f++) {
+            int pares = sumar_pares(matint[f]);
+            System.out.println("La fila "+ f +" tiene " + pares + " numeros pares");
+        }
+
+    }
+
+    public static int sumar_pares(int[] arr) {
+        int pares = 0;
+        for (int i = 0; i < MAXFILA; i++) {
+            if (arr[i] % 2 == 0) {
+                pares++;
+            }
+        }
+        return pares;
     }
 }
