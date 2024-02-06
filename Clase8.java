@@ -23,7 +23,8 @@ public class Clase8 {
 //        imprimir_matriz_double(matdouble);
 //        ejemplo2();
 //        ejercicio1();
-        ejercicio2();
+//        ejercicio2();
+        ejercicio3();
 
     }
 
@@ -226,7 +227,7 @@ public class Clase8 {
         imprimir_matriz_int(matint);
         for (int f = 0; f<MAXFILA; f++) {
             int pares = sumar_pares(matint[f]);
-            System.out.println("La fila "+ f +" tiene " + pares + " numeros pares");
+            System.out.println("La fila"+ f +" tiene " + pares + " numeros pares");
         }
 
     }
@@ -239,5 +240,35 @@ public class Clase8 {
             }
         }
         return pares;
+    }
+
+    public static void ejercicio3(){
+        int [][] matint;
+        int fila, columna;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try{
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una columna :");
+            columna = Integer.valueOf(entrada.readLine());
+            if ((0<=fila)&&(fila < MAXFILA)&&(0<=columna)&&(columna < MAXCOLUMNA)){
+                corrimiento_izq_fila_columna(matint[fila],columna);
+                imprimir_matriz_int(matint);
+            }
+        }
+        catch(Exception exc){
+            System.out.println(exc);
+        }
+    }
+
+    public static void corrimiento_izq_fila_columna(int[] arrenteros, int pos) {
+        int indice = pos;
+        while (indice < arrenteros.length - 1) {
+            arrenteros[indice] = arrenteros[indice + 1];
+            indice++;
+        }
     }
 }
