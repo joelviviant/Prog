@@ -24,7 +24,8 @@ public class Clase7_1 {
 //        ejercicio12();
 //        ejercicio13();
 //        ejercicio14();
-        ejercicio15();
+//        ejercicio15();
+        ejercicio16();
     }
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
@@ -341,6 +342,25 @@ public class Clase7_1 {
         }
     }
 
-
-
+    public static void ejercicio16(){
+        int [] arrenteros;
+        arrenteros = new int[MAX];
+        cargar_arreglo_aleatorio_secuencias_int(arrenteros);
+        imprimir_arreglo_secuencias_int(arrenteros);
+            int comienzo = 0;
+            while (comienzo < arrenteros.length) {
+                int c = encontrarInicioSecuencia(arrenteros, comienzo);
+                if (c == -1) {
+                    break;
+                }
+                int f = encontrarFinSecuencia(arrenteros, c);
+                if (c < f) {
+                    for (int i = c; i <= f; i++){
+                        corrimientoIzquierda(arrenteros, c);
+                }
+            }
+                comienzo = f + 1;
+            }
+            imprimir_arreglo_secuencias_int(arrenteros);
+    }
 }
