@@ -26,7 +26,8 @@ public class Clase8 {
 //        ejercicio2();
 //        ejercicio3();
 //        ejercicio4();
-        ejercicio5();
+//        ejercicio5();
+        ejercicio6();
 
     }
 
@@ -341,21 +342,55 @@ public class Clase8 {
             }
     }
 
+
     public static int[] encontrar_coincidencia(int[][] mat, int numero) {
         int[] resultado = new int[2];
+        resultado[0] = -1; // Inicializamos fila y columna como -1 para indicar que no se encontró ninguna coincidencia
+        resultado[1] = -1;
         for (int fila = 0; fila < MAXFILA; fila++) {
-            for (int columna = 0; columna < mat[fila].length; columna++) {
+            for (int columna = 0; columna < MAXCOLUMNA; columna++) {
                 if (mat[fila][columna] == numero) {
                     resultado[0] = fila;
                     resultado[1] = columna;
-                    return resultado;
+                    return resultado; // Devolvemos la primera coincidencia encontrada
                 }
             }
         }
-        resultado[0] = -1;
-        resultado[1] = -1;
-        return resultado;
+        return resultado; // Devolvemos -1 si no se encontró ninguna coincidencia
     }
+
+
+
+    public static void ejercicio6(){
+        int [][] matint;
+        int fila, columna, numero;
+        int [] resultado;
+        resultado = new int[2];
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            boolean hayCoincidencia = true;
+            while (hayCoincidencia) {
+                resultado = encontrar_coincidencia(matint, numero);
+                if (resultado[0] != -1 && resultado[1] != -1) {
+                    fila= resultado[0];
+                    columna = resultado[1];
+                    corrimiento_izq_fila_columna(matint[fila], columna);
+                } else {
+                    hayCoincidencia = false;
+                    break;
+                }
+            }
+            imprimir_matriz_int(matint);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
+
 }
 
 
