@@ -24,7 +24,8 @@ public class Clase8 {
 //        ejemplo2();
 //        ejercicio1();
 //        ejercicio2();
-        ejercicio3();
+//        ejercicio3();
+        ejercicio4();
 
     }
 
@@ -271,4 +272,40 @@ public class Clase8 {
             indice++;
         }
     }
+
+    public static void ejercicio4(){
+        int [][] matint;
+        int fila, columna, numero;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        cargar_matriz_aleatorio_int(matint);
+        imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try{
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una columna :");
+            columna = Integer.valueOf(entrada.readLine());
+            if ((0<=fila)&&(fila < MAXFILA)&&(0<=columna)&&(columna < MAXCOLUMNA)){
+                corrimiento_der_fila_columna_insercion(matint[fila],columna,numero);
+                imprimir_matriz_int(matint);
+            }
+        }
+        catch(Exception exc){
+            System.out.println(exc);
+        }
+    }
+
+
+    public static void corrimiento_der_fila_columna_insercion(int[] arrenteros, int pos ,int numero) {
+        int indice = MAXCOLUMNA-1;
+        while (indice > pos){
+            arrenteros[indice] = arrenteros[indice-1];
+            indice--;
+        }
+        arrenteros[pos] = numero;
+    }
+
+
 }
