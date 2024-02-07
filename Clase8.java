@@ -33,8 +33,9 @@ public class Clase8 {
 //        ejercicio7();
 //        ejercicio8();
 //        ejercicio9();
-//    ejercicio10();
-        ejercicio11();
+//        ejercicio10();
+//        ejercicio11();
+        ejercicio12();
 
     }
 
@@ -689,6 +690,50 @@ public class Clase8 {
         }
    }
 
+    public static void ejercicio12() {
+        int[][] matint;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        for (int f = 0; f < MAXFILA; f++) {
+            cargar_arreglo_aleatorio_secuencias_int(matint[f]);
+        }
+        imprimir_matriz_int(matint);
+        for (int f = 0; f < MAXFILA; f++) {
+            int inicio = MAXCOLUMNA - 1; // Reinicializar inicio para cada fila
+            int fin = 0;
+            int secuencias = 0;
+            while (secuencias < 2 ) {
+                fin = encontrarFinSecuenciaReversa(matint[f], inicio - 1);
+                inicio = encontrarInicioSecuenciaReversa(matint[f], fin);
+                if (inicio == -1){
+                    break;
+                }
+                secuencias++;
+            }
+            if (secuencias == 1) {
+                System.out.println("En la fila " + f + " solo existe una secuencia.");
+            }
+            if(secuencias == 2){
+                System.out.println("La anteúltima secuencia de la fila " + f + " inicia en " + inicio + " y finaliza en " + fin);
+            }
+        }
+    }
+    public static int encontrarFinSecuenciaReversa(int[] arr, int pos){
+        for (int i = pos; i > 0; i--) {
+            if (arr[i] != 0) {
+                return i ;
+            }
+        }
+        return -1;
+    }    public static int encontrarInicioSecuenciaReversa(int [] arr, int pos){
+        int pos1 = -1;
+        for (int i = pos; i >= 0; i--) {
+            if (arr[i] == 0) {
+                pos1 = i + 1;
+                break;
+            }
+        }
+        return pos1;
+    }
 }
 
 
