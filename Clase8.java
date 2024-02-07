@@ -35,7 +35,8 @@ public class Clase8 {
 //        ejercicio9();
 //        ejercicio10();
 //        ejercicio11();
-        ejercicio12();
+//        ejercicio12();
+        ejercicio13();
 
     }
 
@@ -733,6 +734,42 @@ public class Clase8 {
             }
         }
         return pos1;
+    }
+
+    public static void ejercicio13(){
+        int[][] matint;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        for (int f = 0; f < MAXFILA; f++) {
+            cargar_arreglo_aleatorio_secuencias_int(matint[f]);
+        }
+        imprimir_matriz_int(matint);
+        int longitud;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese una longitud:");
+            longitud = Integer.valueOf(entrada.readLine());
+            int comienzo = 0;
+            for (int fila = 0; fila < MAXFILA; fila++) {
+                while (comienzo < MAXCOLUMNA) {
+                    int c = encontrarInicioSecuencia(matint[fila], comienzo);
+                    if (c == -1) {
+                        break;
+                    }
+                    int f = encontrarFinSecuencia(matint[fila], c);
+                    int tamanio = f - c + 1;
+                    if (tamanio == longitud) {
+                        for (int i = c; i <= f; i++) {
+                            corrimiento_izq_fila_columna(matint[fila], c);
+                        }
+                    }
+                    comienzo = f + 1;
+                }
+                comienzo=0;
+            }
+            imprimir_matriz_int(matint);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
 }
 
