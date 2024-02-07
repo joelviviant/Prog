@@ -33,7 +33,8 @@ public class Clase8 {
 //        ejercicio7();
 //        ejercicio8();
 //        ejercicio9();
-    ejercicio10();
+//    ejercicio10();
+        ejercicio11();
 
     }
 
@@ -525,14 +526,14 @@ public class Clase8 {
         }
     }
     public static void cargar_matriz_aleatorio_secuencias_int(int [][] mat){
-        for (int fila = 0; fila < MAXFILA; fila++){
+        for (int fila = 0; fila < MAXCOLUMNA; fila++){
             cargar_arreglo_aleatorio_secuencias_int(mat[fila]);
         }
         System.out.println("");
     }
     public static void cargar_matriz_aleatorio_secuencias_char(char
                                                                        [][] mat){
-        for (int fila = 0; fila < MAXFILA; fila++){
+        for (int fila = 0; fila < MAXCOLUMNA; fila++){
             cargar_arreglo_aleatorio_secuencias_char(mat[fila]);
         }
         System.out.println("");
@@ -540,8 +541,8 @@ public class Clase8 {
     public static void cargar_arreglo_aleatorio_secuencias_char(char[] arr){
         Random r = new Random();
         arr[0] = ' ';
-        arr[MAXFILA-1] = ' ';
-        for (int pos = 1; pos < MAXFILA-1; pos++){
+        arr[MAXCOLUMNA-1] = ' ';
+        for (int pos = 1; pos < MAXCOLUMNA-1; pos++){
             if (r.nextDouble()>probabilidad_letra){
                 arr[pos]=(char)(r.nextInt(26) + 'a');
             }
@@ -568,18 +569,125 @@ public class Clase8 {
         int[][] matint;
        int  fin= 0;
         int inicio = 0;
+        int numero, fila;
         matint = new int[MAXFILA][MAXCOLUMNA];
-        for (int fila = 0; fila < MAXFILA; fila++){
-            cargar_arreglo_aleatorio_secuencias_int(matint[fila]);
+        for (int f = 0; f < MAXFILA; f++){
+            cargar_arreglo_aleatorio_secuencias_int(matint[f]);
         }
         imprimir_matriz_int(matint);
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Ingrese un numero :");
+            numero = Integer.valueOf(entrada.readLine());
+            System.out.println("Ingrese una fila :");
+            fila = Integer.valueOf(entrada.readLine());
+            if (matint[fila][numero]!=0){
+            int posInicial = encontrarInicioSecuenciaEspecifico(matint[fila], numero);
+            int posFinal = encontrarFinSecuencia(matint[fila],posInicial);
+                System.out.println("la posicion inicial de la secuencia es "+ posInicial + " y la posicion final es "+ posFinal);
+            }else {
+                System.out.println("La posicion requerida no tiene una secuencia");
+            }
 
-//        for (int fila = 0; fila < MAXFILA; fila++) {
-//            inicio = encontrarInicioSecuencia(matint[fila], fin + 1);
-//            fin = encontrarFinSecuencia(matint[fila], inicio);
-//            System.out.println("Inicio: " + inicio + ", Fin: " + fin);
-//        }
+        }catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
+
+    public static int encontrarInicioSecuenciaEspecifico(int[] arr, int pos) {
+        int pos1 = 0;
+        if (pos >= 0 && pos < arr.length) {
+            for (int i = pos; i >= 0; i--) {
+                if (arr[i] == 0) {
+                    pos1 = i + 1;
+                    break;
+                }
+            }
+        }
+        return pos1;
+    }
+
+    public static int encontrarFinSecuencia(int[] arr, int pos) {
+        int pos2 = 0;
+        for (int i = pos; i < arr.length; i++) { // Utiliza la longitud del array arr en lugar de MAXFILA
+            if (arr[i] == 0) {
+                pos2 = i - 1;
+                break;
+            }
+        }
+        return pos2;
+    }
+
+    public static void imprimir_suma_cada_secuencia(int[] arr){
+        int inicio,fin,suma;
+        inicio = 0;
+        fin = -1;
+        while ((inicio < MAXCOLUMNA)){
+            inicio = encontrarInicioSecuencia(arr,fin+1);
+            if (inicio < MAXCOLUMNA){
+                fin = encontrarFinSecuencia(arr,inicio);
+                suma = obtener_suma_secuencia(arr,inicio,fin);
+                System.out.println("La suma de la secuencia de "+inicio+" a "+fin+" es "+suma);
+            }
+        }
+    }
+
+    public static int encontrarInicioSecuencia(int[] arr, int pos){
+        for (int i = pos; i < MAXCOLUMNA; i++) {
+            if (arr[i] != 0) {
+                return i ;
+            }
+        }
+        return -1;
+    }
+
+    public static int obtener_suma_secuencia(int[] arr, int inicio, int fin){
+        int suma = 0;
+        while (inicio <= fin){
+            suma+=arr[inicio];
+            inicio++;
+        }
+        return suma;
+    }
+
+    public static void imprimir_suma_Mayor(int[] arr){
+        int inicio, fin, suma, sumaTemp, inicioTemp, finTemp;
+        inicio = 0;
+        fin = -1;
+        sumaTemp = 0;
+        suma = 0;
+        inicioTemp = 0;
+        finTemp = 0;
+        while (inicio < MAXCOLUMNA) {
+            inicio = encontrarInicioSecuencia(arr, fin + 1);
+            if (inicio == -1) {
+                break; // Salir del bucle si encontrarInicioSecuencia devuelve -1
+            }
+            fin = encontrarFinSecuencia(arr, inicio);
+            if (fin == -1) {
+                break; // Salir del bucle si encontrarFinSecuencia devuelve -1
+            }
+            suma = obtener_suma_secuencia(arr, inicio, fin);
+            if (sumaTemp < suma) {
+                inicioTemp = inicio;
+                finTemp = fin;
+                sumaTemp = suma;
+            }
+        }
+        System.out.println("La suma mayor de las secuencias es " + sumaTemp + " de la posicion " + inicioTemp + " a " + finTemp);
+    }
+
+    public static void ejercicio11() {
+        int[][] matint;
+        matint = new int[MAXFILA][MAXCOLUMNA];
+        for (int f = 0; f < MAXFILA; f++) {
+            cargar_arreglo_aleatorio_secuencias_int(matint[f]);
+        }
+        imprimir_matriz_int(matint);
+        for (int f = 0; f < MAXFILA; f++) {
+            imprimir_suma_Mayor(matint[f]);
+        }
+   }
 
 }
 
